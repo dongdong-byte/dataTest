@@ -3,6 +3,7 @@ package kim.dataTest.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,10 +26,10 @@ public class OnBidPropertyCreateDto {
     private String sido;//    시도
     private String sgk;                 // 시군구
     private String emd;//    읍면동
-    @NotBlank(message = "감정가는 필수입니다.")
+    @NotNull(message = "감정가는 필수입니다.")
     @Min(value = 0 , message = "감정가는  0 이상이어야 합니다." )
     private Long goodsPrice;//    감정가
-    @NotBlank(message = "최저 입찰가는 필수입니다.")
+    @NotNull(message = "최저 입찰가는 필수입니다.")
     @Min(value = 0 , message = "최저 입찰가는  0 이상이어야 합니다." )
     private Long openPrice;//    최저 입찰가
     private  String pbctBegnDtm;//    공고 시작일

@@ -28,7 +28,7 @@ public class OnBidPropertyContorller {
 //    GET/onbidproperty
     @GetMapping
     public String list(Model model) {
-        List<OnBidPropertyListDto> properties = onBidPropertyService.findAll();
+        List<OnBidPropertyListDto> properties = onBidPropertyService.findAll(); // TODO: findAll 메서드 구현 필요
         int totalCount = onBidPropertyService.countAll();
 
         model.addAttribute("properties", properties);
@@ -40,7 +40,7 @@ public class OnBidPropertyContorller {
     @GetMapping("/search")
     public String search(OnBidPropertySearchDto onBidPropertySearchDto, Model model) {
         List<OnBidPropertyListDto> properties= onBidPropertyService.search(onBidPropertySearchDto);
-        int searchCount = onBidPropertyService.countSearchResults(onBidPropertySearchDto);
+        int searchCount = onBidPropertyService.countSearchResults(onBidPropertySearchDto); // TODO: countSearchResults 메서드 구현 필요
         model.addAttribute("properties", properties);
         model.addAttribute("searchCount", searchCount);
         model.addAttribute("onBidPropertySearchDto", onBidPropertySearchDto);
@@ -58,7 +58,7 @@ public String listWithPaging(
         Model model
     ){
         int offset = (page - 1) * size;
-        List<OnBidPropertyListDto> properties= onBidPropertyService.findAllWithPaging(offset, size);
+        List<OnBidPropertyListDto> properties = onBidPropertyService.findAllWithPaging(offset ,size); // TODO: findAllWithPaging 메서드 구현 필요
         int  totalCount = onBidPropertyService.countAll();
         int totalPages = (int) Math.ceil((double) totalCount/ size);
         model.addAttribute("properties", properties);
@@ -79,8 +79,8 @@ public String listWithPaging(
         Model model
 ){
     int offset = (page - 1) * size;
-    List<OnBidPropertyListDto> properties= onBidPropertyService.findAllWithPaging(offset, size);
-    int  searchCount = onBidPropertyService.countSearchResults(onBidPropertySearchDto);
+    List<OnBidPropertyListDto> properties = onBidPropertyService.searchWithPaging(onBidPropertySearchDto ,offset,size); // TODO: findAllWithPaging 메서드 구현 필요
+    int  searchCount = onBidPropertyService.countSearchResults(onBidPropertySearchDto); // TODO: countSearchResults 메서드 구현 필요
     int totalPages = (int) Math.ceil((double) searchCount/ size);
     model.addAttribute("properties", properties);
     model.addAttribute("searchCount", searchCount);
@@ -104,7 +104,7 @@ public String listWithPaging(
     }
 //     물건 관리 번호로 상세 조회
 //    GET /onbidproperty/cltr-mnmt-no/{cltrMnmtNo}
-    @GetMapping("/cltr-mnmt-no/{cltrMnmtNo")
+    @GetMapping("/cltr-mnmt-no/{cltrMnmtNo}")
     public String detailByCltrMnmtNo(@PathVariable String cltrMnmtNo ,Model model){
         OnBidPropertyDetailDto property = onBidPropertyService.findByCltrMnmtNo(cltrMnmtNo);
         model.addAttribute("property", property);
@@ -120,12 +120,24 @@ public String listWithPaging(
         return "onbidproperty/form";
     }
 //    등록 처리
+//    POST /onbidproperty
+    @PostMapping
+    public String create(
+            @ModelAttribute OnBidPropertyCreateDto dto,
+            RedirectAttributes redirectAttributes
+    ) {
+        Long id = onBidPropertyService.create(dto);
+        redirectAttributes.addFlashAttribute("message", "물건이 등록되었습니다");
+        return "redirect:/onbidproperty/" + id;
+    }
+
+//    API에서 데이터 가져오기
 //    Post /onbidproperty/fetch
     @PostMapping("/fetch")
     public  String fetchFromApi(
             @RequestParam(required = false) String sido,
-            @RequestParam(defaultValue = "1") int  numOfRows,
-            @RequestParam(defaultValue = "10") int pageNo,
+            @RequestParam(defaultValue = "10") int  numOfRows,
+            @RequestParam(defaultValue = "1") int pageNo,
             RedirectAttributes redirectAttributes) throws IOException{
 
         int savedCount = onBidPropertyService.fetchAndSavePropertiesFromApi(sido, numOfRows, pageNo);

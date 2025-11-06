@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물건 상세 정보</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>물건 상세 정보</h1>
+        <nav>
+            <a th:href="@{/onbidproperty}" class="btn">목록으로</a>
+            <a th:href="@{/onbidproperty/{id}/edit(id=${property.id})}" class="btn btn-warning">수정</a>
+            <button onclick="deleteProperty()" class="btn btn-danger">삭제</button>
+        </nav>
+    </header>
+
+    <!-- 알림 메시지 -->
+    <div th:if="${message}" class="alert alert-success">
+        <span th:text="${message}"></span>
+    </div>
+
+    <!-- 상세 정보 -->
+    <div class="detail-box">
+        <h2>기본 정보</h2>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <label>ID</label>
+                <span th:text="${property.id}">1</span>
+            </div>
+            <div class="detail-item">
+                <label>물건관리번호</label>
+                <span th:text="${property.cltrMnmtNo}">2012-1141-001291</span>
+            </div>
+            <div class="detail-item">
+                <label>물건명</label>
+                <span th:text="${property.cltrNm}">물건명</span>
+            </div>
+            <div class="detail-item">
+                <label>처분방법코드</label>
+                <span th:text="${property.dpslMtdCd}">0001</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-box">
+        <h2>카테고리 정보</h2>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <label>카테고리 상위 ID</label>
+                <span th:text="${property.ctgrHirkId}">10000</span>
+            </div>
+            <div class="detail-item">
+                <label>카테고리 중위 ID</label>
+                <span th:text="${property.ctgrHirkIdMid}">10100</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-box">
+        <h2>소재지 정보</h2>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <label>시도</label>
+                <span th:text="${property.sido}">서울</span>
+            </div>
+            <div class="detail-item">
+                <label>시군구</label>
+                <span th:text="${property.sgk}">강남구</span>
+            </div>
+            <div class="detail-item">
+                <label>읍면동</label>
+                <span th:text="${property.emd}">역삼동</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-box">
+        <h2>가격 정보</h2>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <label>감정가</label>
+                <span th:text="${#numbers.formatInteger(property.goodsPrice, 0, 'COMMA')} + ' 원'">
+                        1,000,000 원
+                    </span>
+            </div>
+            <div class="detail-item">
+                <label>최저입찰가</label>
+                <span th:text="${#numbers.formatInteger(property.openPrice, 0, 'COMMA')} + ' 원'">
+                        800,000 원
+                    </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-box">
+        <h2>공고 정보</h2>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <label>공고시작일</label>
+                <span th:text="${property.pbctBegnDtm}">20240101</span>
+            </div>
+            <div class="detail-item">
+                <label>공고종료일</label>
+                <span th:text="${property.pbctClsDtm}">20241231</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <a th:href="@{/onbidproperty}" class="btn">목록으로</a>
+        <a th:href="@{/onbidproperty/{id}/edit(id=${property.id})}" class="btn btn-warning">수정</a>
+        <button onclick="deleteProperty()" class="btn btn-danger">삭제</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 온비드 물건 관리 시스템</p>
+    </footer>
+</div>
+
+<!-- 삭제 폼 (숨김) -->
+<form th:action="@{/onbidproperty/{id}/delete(id=${property.id})}"
+      method="post"
+      id="deleteForm"
+      style="display: none;">
+</form>
+
+<script>
+    function deleteProperty() {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+</body>
+</html>
