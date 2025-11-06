@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${property.id != null ? '물건 수정' : '물건 등록'}">물건 등록</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1 th:text="${property.id != null ? '물건 수정' : '물건 등록'}">물건 등록</h1>
+        <nav>
+            <a th:href="@{/properties}" class="btn">목록으로</a>
+        </nav>
+    </header>
+
+    <!-- 등록 폼 -->
+    <form th:action="${property.id != null ? '/properties/' + property.id + '/edit' : '/properties'}"
+          method="post"
+          th:object="${property}"
+          class="form-box">
+
+        <h2>기본 정보</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cltrMnmtNo">물건관리번호 <span class="required">*</span></label>
+                <input type="text"
+                       id="cltrMnmtNo"
+                       th:field="*{cltrMnmtNo}"
+                       placeholder="예: 2012-1141-001291"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="cltrNm">물건명 <span class="required">*</span></label>
+                <input type="text"
+                       id="cltrNm"
+                       th:field="*{cltrNm}"
+                       placeholder="물건명 입력"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="dpslMtdCd">처분방법코드 <span class="required">*</span></label>
+                <select id="dpslMtdCd" th:field="*{dpslMtdCd}" required>
+                    <option value="">선택하세요</option>
+                    <option value="0001">0001 - 매각</option>
+                    <option value="0002">0002 - 임대</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>카테고리 정보</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="ctgrHirkId">카테고리 상위 ID</label>
+                <input type="text"
+                       id="ctgrHirkId"
+                       th:field="*{ctgrHirkId}"
+                       placeholder="예: 10000">
+            </div>
+            <div class="form-group">
+                <label for="ctgrHirkIdMid">카테고리 중위 ID</label>
+                <input type="text"
+                       id="ctgrHirkIdMid"
+                       th:field="*{ctgrHirkIdMid}"
+                       placeholder="예: 10100">
+            </div>
+        </div>
+
+        <h2>소재지 정보</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="sido">시도 <span class="required">*</span></label>
+                <input type="text"
+                       id="sido"
+                       th:field="*{sido}"
+                       placeholder="예: 서울"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="sgk">시군구</label>
+                <input type="text"
+                       id="sgk"
+                       th:field="*{sgk}"
+                       placeholder="예: 강남구">
+            </div>
+            <div class="form-group">
+                <label for="emd">읍면동</label>
+                <input type="text"
+                       id="emd"
+                       th:field="*{emd}"
+                       placeholder="예: 역삼동">
+            </div>
+        </div>
+
+        <h2>가격 정보</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="goodsPrice">감정가 <span class="required">*</span></label>
+                <input type="number"
+                       id="goodsPrice"
+                       th:field="*{goodsPrice}"
+                       placeholder="숫자만 입력"
+                       min="0"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="openPrice">최저입찰가 <span class="required">*</span></label>
+                <input type="number"
+                       id="openPrice"
+                       th:field="*{openPrice}"
+                       placeholder="숫자만 입력"
+                       min="0"
+                       required>
+            </div>
+        </div>
+
+        <h2>공고 정보</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="pbctBegnDtm">공고시작일</label>
+                <input type="text"
+                       id="pbctBegnDtm"
+                       th:field="*{pbctBegnDtm}"
+                       placeholder="YYYYMMDD 형식">
+            </div>
+            <div class="form-group">
+                <label for="pbctClsDtm">공고종료일</label>
+                <input type="text"
+                       id="pbctClsDtm"
+                       th:field="*{pbctClsDtm}"
+                       placeholder="YYYYMMDD 형식">
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${property.id != null ? '수정' : '등록'}">등록</span>
+            </button>
+            <a th:href="@{/properties}" class="btn">취소</a>
+        </div>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 온비드 물건 관리 시스템</p>
+    </footer>
+</div>
+</body>
+</html>
