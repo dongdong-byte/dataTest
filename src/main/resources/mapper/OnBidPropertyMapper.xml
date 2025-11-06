@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kim.dataTest.mapper.OnBidPropertyMapper">
+    <!--    RestultMap정의-->
+    <resultMap id="onBidPropertyResultMap" type="OnBidProperty">
+        <id property="id" column="id" />
+        <result property="cltrMnmtNo" column="cltr_mnmt_no"/>
+        <result property="cltrNm" column="cltr_nm"/>
+        <result property="dpslMtdCd" column="dpsl_mtd_cd"/>
+        <result property="ctgrHirkId" column="ctgr_hirk_id"/>
+        <result property="ctgrHirkIdMid" column="ctgr_hirk_id_mid"/>
+        <result property="sido" column="sido"/>
+        <result property="sgk" column="sgk"/>
+        <result property="emd" column="emd"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="openPrice" column="open_price"/>
+        <result property="pbctBegnDtm" column="pbct_begn_dtm"/>
+        <result property="pbctClsDtm" column="pbct_cls_dtm"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    <!--create -->
+    <!--    단건 등록-->
+    <insert id="insert" parameterType="OnBidProperty" useGeneratedKeys="true" keyProperty="id">
+        insert into onbidproperty(
+            cltr_mnmt_no,
+            cltr_nm,
+            dpsl_mtd_cd,
+            ctgr_hirk_id,
+            ctgr_hirk_id_mid,
+            sido,
+            sgk,
+            emd,
+            goods_price,
+            open_price,
+            pbct_begn_dtm,
+            pbct_cls_dtm) VALUES
+            (#{cltrMnmtNo}
+            ,#{cltrNm}
+            ,#{dpslMtdCd}
+            , #{ctgrHirkId}
+            ,#{ctgrHirkIdMid}
+            ,#{sido}
+            ,#{sgk}
+            ,#{emd}
+            ,#{goodsPrice}
+            ,#{openPrice}
+            ,#{pbctBegnDtm}
+            ,#{pbctClsDtm})
+    </insert>
+<!--    다건 일괄 등록-->
+    <insert id="insertBatch" parameterType="list">
+        insert into onbidproperty(
+        cltr_mnmt_no,
+        cltr_nm,
+        dpsl_mtd_cd,
+        ctgr_hirk_id,
+        ctgr_hirk_id_mid,
+        sido,
+        sgk,
+        emd,
+        goods_price,
+        open_price,
+        pbct_begn_dtm,
+        pbct_cls_dtm) VALUES
+              <foreach collection="list" item="item" separator=",">
+                  (#{item.cltrMnmtNo}
+                  ,#{item.cltrNm}
+                  ,#{item.dpslMtdCd}
+                  , #{item.ctgrHirkId}
+                  ,#{item.ctgrHirkIdMid}
+                  ,#{item.sido}
+                  ,#{item.sgk}
+                  ,#{item.emd}
+                  ,#{item.goodsPrice}
+                  ,#{item.openPrice}
+                  ,#{item.pbctBegnDtm}
+                  ,#{item.pbctClsDtm})
+             </foreach>
+    </insert>
+<!--======================READ=================== -->
+<!--    전체 목록 조회-->
+    <select id="findAll" resultMap="onBidPropertyResultMap">
+        select  * from onbidproperty order by created_at desc ;     
+    </select>
+<!--ID로 단건 조회-->
+    <select id="findOnBidPropertyById" parameterType="long" resultMap="onBidPropertyResultMap">
+        select  * from onbidproperty where id=#{id};
+
+    </select>
+<!--    물건 관리 번호로 조회 (중복 체크됨)-->
+    <select id="findOnBidPropertyByCltrMnmtNo" parameterType="string" resultMap="onBidPropertyResultMap">
+        select  * from onbidproperty where cltr_mnmt_no=#{cltrMnmtNo};
+    </select>
+<!--전체 건수 조회-->
+    <select id="count" resultType="int">
+        select COUNT(*) from onbidproperty;
+    </select>
+<!--    ==================UPDATE=============-->
+<!--    단건 수정-->
+    <update id="updateOnBidProperty" parameterType="OnBidProperty">
+        update onbidproperty set
+                                 cltr_nm=#{cltrNm},
+                                 dpsl_mtd_cd=#{dpslMtdCd},
+                                 ctgr_hirk_id=#{ctgrHirkId},
+                                 ctgr_hirk_id_mid=#{ctgrHirkIdMid},
+                                 sido=#{sido},
+                                 sgk=#{sgk},
+                                 emd=#{emd},
+                                 goods_price=#{goodsPrice},
+                                 open_price=#{openPrice},
+                                 pbct_begn_dtm=#{pbctBegnDtm},
+                                 pbct_cls_dtm=#{pbctClsDtm}
+        where id=#{id}
+
+    </update>
+    
+<!--    ===================DELETE==============-->
+<!--    id로 단건 삭제-->
+    <delete id="deleteOnBidPropertyById" parameterType="long">
+
+        delete from onbidproperty where id=#{id};
+    </delete>
+
+<!--    전체 삭제-->
+    <delete id="deleteAll" >
+
+        delete from onbidproperty ;
+    </delete>
+<!--    ===========검색기능==============-->
+<!--    동적 검색-->
+    <select id="searchOnBidProperty" parameterType="map" resultMap="onBidPropertyResultMap">
+select *
+from onbidproperty
+<where>
+<if test="cltrNm != null and cltrNm != ''">
+and     cltr_nm Like CONCAT( '%' , #{cltrNm},'%')
+</if>
+<if test="sido != null and sido != ''">
+and     sido Like CONCAT( '%' , #{sido},'%')
+</if>
+<if test="sgk != null and sgk != ''">
+and     sgk Like CONCAT( '%' , #{sgk},'%')
+</if>
+<if test="emd != null and emd != ''">
+and     emd Like CONCAT( '%' , #{emd},'%')
+</if>
+<if test="dpslMtdCd  != null and dpslMtdCd  != ''">
+and dpsl_mtd_cd = #{dpslMtdCd}
+</if>
+<if test="goodsPriceFrom != null">
+and     goods_price  &gt;= #{goodsPriceFrom}
+</if>
+<if test="goodsPriceTo != null ">
+and     goods_price  &lt;= #{goodsPriceTo}
+</if>
+<if test="openPriceFrom != null">
+and     open_price  &gt;= #{openPriceFrom}
+</if>
+<if test="openPriceTo != null">
+and     open_price  &lt;= #{openPriceTo}
+</if>
+</where>
+order by created_at DESC
+    </select>
+<!--    =================정렬 기능=========================-->
+<!--    가격순 정렬 조회-->
+    <select id="findAllOrderByPrice" resultMap="onBidPropertyResultMap">
+        select * from onBidProperty
+        order by
+            <choose>
+            <when test="priceType == 'goods'">
+                goods_price
+            </when>
+                <when test="priceType == 'open'">
+                    open_price
+                </when>
+<otherwise>
+    goods_price
+</otherwise>
+            </choose>
+        <choose>
+            <when test="order == 'ASC'">
+                ASC
+            </when>
+            <when test="order == 'DESC'">
+                DESC
+            </when>
+            <otherwise>
+                ASC
+            </otherwise>
+        </choose>
+    </select>
+<!--페이징 기능-->
+<!--    페이징 처리된 목록 조회-->
+    <select id="findAllWithPaging" resultMap="onBidPropertyResultMap">
+        select * from onbidproperty
+        order by  created_at DESC
+            limit #{limit} offset #{offset}
+ </select>
+<!--    검색 + 페이징 조합-->
+    <select id="searchWithPaging" resultMap="onBidPropertyResultMap">
+        SELECT *
+        FROM onBidProperty
+        <where>
+            <if test="params.cltrNm != null and params.cltrNm != ''">
+                and     cltr_nm Like CONCAT( '%' , #{params.cltrNm},'%')
+            </if>
+            <if test="params.sido != null and params.sido != ''">
+                and     sido=  #{params.sido}
+            </if>
+            <if test="params.sgk != null and params.sgk != ''">
+                and     sgk = #{params.sgk}
+            </if>
+            <if test="params.emd != null and params.emd != ''">
+                and emd =#{params.emd}
+            </if>
+            <if test="params.dpslMtdCd  != null and params.dpslMtdCd  != ''">
+                and dpsl_mtd_cd = #{params.dpslMtdCd}
+            </if>
+            <if test="params.goodsPriceFrom != null">
+                and     goods_price  &gt;= #{params.goodsPriceFrom}
+            </if>
+            <if test="params.goodsPriceTo != null ">
+                and     goods_price  &lt;= #{params.goodsPriceTo}
+            </if>
+            <if test="params.openPriceFrom != null">
+                and     open_price  &gt;= #{params.openPriceFrom}
+            </if>
+            <if test="params.openPriceTo != null">
+                and     open_price  &lt;= #{params.openPriceTo}
+            </if>
+        </where>
+        order by  created_at DESC
+        limit #{limit} offset #{offset}
+    </select>
+<!--검색 결과 건수 (페이징용)-->
+    <select id="countBySearch" parameterType="map" resultType="int">
+        select COUNT(*) from onbidproperty
+        <where>
+            <if test="cltrNm != null and cltrNm != ''">
+                and     cltr_nm Like CONCAT( '%' , #{cltrNm},'%')
+            </if>
+            <if test="sido != null and sido != ''">
+                and     sido = #{sido}
+            </if>
+            <if test="sgk != null and sgk != ''">
+                and     sgk = #{sgk}
+            </if>
+            <if test="emd != null and emd != ''">
+                and     emd = #{emd}
+            </if>
+            <if test="dpslMtdCd  != null and dpslMtdCd  != ''">
+                and     dpsl_mtd_cd  = #{dpslMtdCd}
+            </if>
+            <if test="goodsPriceFrom != null">
+                and     goods_price &gt;= #{goodsPriceFrom}
+            </if>
+            <if test="goodsPriceTo != null ">
+                and     goods_price &lt;= #{goodsPriceTo}
+            </if>
+            <if test="openPriceFrom != null">
+                and     open_price &gt;= #{openPriceFrom}
+            </if>
+            <if test="openPriceTo != null">
+                and     open_price &lt;= #{openPriceTo}
+            </if>
+
+
+        </where>
+
+
+    </select>
+</mapper>
