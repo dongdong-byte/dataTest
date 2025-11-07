@@ -1,229 +1,203 @@
 package kim.dataTest.service;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import kim.dataTest.dto.KamkoApiResponseDto;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate; // RestTemplate 사용
+import org.springframework.web.util.UriComponentsBuilder; // URL 빌더 사용
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class KamcoApiService {
 
     @Value("${kamco.api.service-key}")
     private String serviceKey;
 
+    private  XmlMapper xmlMapper;
+    private final RestTemplate restTemplate;
 
-//    기본검색 - 시도 별 조회
+    // API 기본 URL
+    private final String BASE_URL = "http://openapi.onbid.co.kr/openapi/services/KamcoPblsalThingInquireSvc/getKamcoPbctCltrList";
 
+    // 생성자를 통해 Bean으로 등록된 RestTemplate과 XmlMapper를 주입받습니다.
+    public KamcoApiService(RestTemplate restTemplate, XmlMapper xmlMapper) {
+        this.restTemplate = restTemplate;
+        this.xmlMapper = xmlMapper;
+    }
+
+    /**
+     * 기본검색 - 시도 별 조회
+     */
     public String fetchPropertiesBySido(String sido, int numOfRows, int pageNo) throws IOException {
 
-            StringBuilder urlBuilder = new StringBuilder(
-                    "http://openapi.onbid.co.kr/openapi/services/KamcoPblsalThingInquireSvc/getKamcoPbctCltrList");
-// 요청 서비스키
+        UriComponentsBuilder builder = createBaseBuilder(numOfRows, pageNo);
 
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey);
-//            사용 되는 필드들
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" +
-                    URLEncoder.encode(String.valueOf(numOfRows), "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" +
-                    URLEncoder.encode(String.valueOf(pageNo), "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("DPSL_MTD_CD", "UTF-8") + "=" +
-                    URLEncoder.encode("0001", "UTF-8"));
-//            0001 매각, 0002 임대
-            urlBuilder.append("&" + URLEncoder.encode("CTGR_HIRK_ID", "UTF-8") + "=" +
-                    URLEncoder.encode("10000", "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("CTGR_HIRK_ID_MID", "UTF-8") + "=" +
-                    URLEncoder.encode("10100", "UTF-8"));
-//            선택적 파라미터-시도
-            if (sido != null && !sido.isEmpty()) {
-                urlBuilder.append("&" + URLEncoder.encode("SIDO", "UTF-8") + "=" +
+        // 선택적 파라미터 - 시도
+        addQueryParamIfPresent(builder, "SIDO", sido);
 
-                        URLEncoder.encode(sido, "UTF-8"));
+        return callApi(builder);
+    }
 
-            }
+    /**
+     * 상세 조건 검색
+     */
+    public String fetchPropertiesWithConditions(
+            String sido, String sgk, String emd,
+            String goodsPriceForm, String goodsPriceTo,
+            String openPriceForm, String openPriceTo,
+            int numOfRows, String cltrNm,
+            String pbctBegmDtm, String pbctClsDtm, int pageNo
+    ) throws IOException {
 
-            URL url = new URL(urlBuilder.toString());
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        UriComponentsBuilder builder = createBaseBuilder(numOfRows, pageNo);
 
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-type", "application/xml");
+        // 선택적 파라미터들
+        addQueryParamIfPresent(builder, "SIDO", sido);
+        addQueryParamIfPresent(builder, "SGK", sgk);
+        addQueryParamIfPresent(builder, "EMD", emd);
+        addQueryParamIfPresent(builder, "GOODS_PRICE_FROM", goodsPriceForm);
+        addQueryParamIfPresent(builder, "GOODS_PRICE_TO", goodsPriceTo);
+        addQueryParamIfPresent(builder, "OPEN_PRICE_TO", openPriceTo);
+        addQueryParamIfPresent(builder, "OPEN_PRICE_FROM", openPriceForm);
+        addQueryParamIfPresent(builder, "CLTR_NM", cltrNm);
+        addQueryParamIfPresent(builder, "PBCT_BEGN_DTM", pbctBegmDtm);
+        addQueryParamIfPresent(builder, "PBCT_CLS_DTM", pbctClsDtm);
 
-            log.info("API요청 URL : {}", urlBuilder.toString());
-            log.info("API요청 응답코드 : {}", conn.getResponseCode());
-            BufferedReader rd;
-            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-                rd = new BufferedReader((new InputStreamReader(conn.getInputStream())));
-            } else {
-                rd = new BufferedReader((new InputStreamReader(conn.getErrorStream())));
-            }
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                sb.append(line);
+        return callApi(builder);
+    }
 
-            }
-            rd.close();
-            conn.disconnect();
-            String response = sb.toString();
-            log.info("API 응답 : {}", response);
+    /**
+     * RestTemplate을 사용해 실제 API를 호출하는 공통 메서드
+     */
+    private String callApi(UriComponentsBuilder builder) throws IOException {
+        // serviceKey에 인코딩된 문자가 포함될 수 있으므로 build(false) 사용
+        String url = builder.build(false).toUriString();
+        log.info("API 요청 URL : {}", url);
+
+        try {
+            // API 호출 (GET 요청)
+            String response = restTemplate.getForObject(url, String.class);
+            log.info("API 응답 수신 완료");
+            // 응답 본문은 매우 길 수 있으므로 DEBUG 레벨로 로깅하는 것을 권장
+            log.debug("API 응답 : {}", response);
 
             return response;
+
+        } catch (org.springframework.web.client.RestClientException e) {
+            log.error("API 호출 실패: {}", e.getMessage());
+            throw new IOException("API 호출 중 오류 발생", e);
         }
-//상세 조건 검색
-
-    public String fetchPropertiesWithConditions(
-            String sido,
-            String sgk,
-            String emd,
-            String goodsPriceForm,
-            String goodsPriceTo,
-            String openPriceForm,
-            String openPriceTo,
-            int numOfRows,
-            String cltrNm,
-            String pbctBegmDtm,
-            String pbctClsDtm,
-            int pageNo
-    ) throws IOException{
-//        요청 서비스키
-        StringBuilder urlBuilder = new StringBuilder(
-
-                "http://openapi.onbid.co.kr/openapi/services/KamcoPblsalThingInquireSvc/getKamcoPbctCltrList");
-//        필수 파라미터
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey);
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" +
-                URLEncoder.encode(String.valueOf(numOfRows), "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" +
-                URLEncoder.encode(String.valueOf(pageNo), "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("DPSL_MTD_CD", "UTF-8") + "=" +
-                URLEncoder.encode("0001", "UTF-8"));
-//            0001 매각, 0002 임대
-        urlBuilder.append("&" + URLEncoder.encode("CTGR_HIRK_ID", "UTF-8") + "=" +
-                URLEncoder.encode("10000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("CTGR_HIRK_ID_MID", "UTF-8") + "=" +
-                URLEncoder.encode("10100", "UTF-8"));
-//        선택적 파라미터들
-
-        if (sido != null && !sido.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("SIDO", "UTF-8") + "=" +
-
-                    URLEncoder.encode(sido, "UTF-8"));
-
-        }
-        if (sgk  != null && !sgk.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("SGK", "UTF-8") + "=" +
-
-                    URLEncoder.encode(sgk, "UTF-8"));
-
-        }
-        if (emd != null && !emd.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("EMD", "UTF-8") + "=" +
-
-                    URLEncoder.encode(emd, "UTF-8"));
-
-        }
-        if (goodsPriceForm != null && !goodsPriceForm.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("GOODS_PRICE_FROM", "UTF-8") + "=" +
-
-                    URLEncoder.encode(goodsPriceForm, "UTF-8"));
-
-        }
-        if (goodsPriceTo != null && !goodsPriceTo.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("GOODS_PRICE_TO", "UTF-8") + "=" +
-
-                    URLEncoder.encode(goodsPriceTo, "UTF-8"));
-
-        }
-        if (openPriceTo != null && !openPriceTo.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("OPEN_PRICE_TO", "UTF-8") + "=" +
-
-                    URLEncoder.encode(openPriceTo, "UTF-8"));
-
-        }
-        if (openPriceForm != null && !openPriceForm.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("OPEN_PRICE_FROM", "UTF-8") + "=" +
-
-                    URLEncoder.encode(openPriceForm, "UTF-8"));
-
-        }
-        if (cltrNm != null && !cltrNm.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("CLTR_NM", "UTF-8") + "=" +
-
-                    URLEncoder.encode(cltrNm, "UTF-8"));
-
-        }
-        if (pbctBegmDtm != null && !pbctBegmDtm.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("PBCT_BEGN_DTM", "UTF-8") + "=" +
-
-                    URLEncoder.encode(pbctBegmDtm, "UTF-8"));
-
-        }
-        if (pbctClsDtm != null && !pbctClsDtm.isEmpty()) {
-            urlBuilder.append("&" + URLEncoder.encode("PBCT_CLS_DTM", "UTF-8") + "=" +
-
-                    URLEncoder.encode(pbctClsDtm, "UTF-8"));
-
-        }
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/xml");
-
-        log.info("API요청 URL : {}", urlBuilder.toString());
-        log.info("API요청 응답코드 : {}", conn.getResponseCode());
-        BufferedReader rd;
-        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader((new InputStreamReader(conn.getInputStream())));
-        } else {
-            rd = new BufferedReader((new InputStreamReader(conn.getErrorStream())));
-        }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-
-        }
-        rd.close();
-        conn.disconnect();
-        String response = sb.toString();
-        log.info("API 응답 : {}", response);
-
-        return response;
-
     }
 
-//    XML 응답 파싱 (실제 구현 필요)
-//     * TODO: 온비드 API의 실제 XML 구조에 맞게 파싱 로직 구현
+    /**
+     * API 호출을 위한 기본 UriComponentsBuilder를 생성합니다. (공통 파라미터 포함)
+     */
+    private UriComponentsBuilder createBaseBuilder(int numOfRows, int pageNo) {
+        return UriComponentsBuilder.fromHttpUrl(BASE_URL)
+                .queryParam("serviceKey", serviceKey) // 인코딩 자동 처리
+                .queryParam("numOfRows", String.valueOf(numOfRows))
+                .queryParam("pageNo", String.valueOf(pageNo))
+                .queryParam("DPSL_MTD_CD", "0001")
+                .queryParam("CTGR_HIRK_ID", "10000")
+                .queryParam("CTGR_HIRK_ID_MID", "10100");
+    }
 
-
-    public List<KamkoApiResponseDto> parseXmlResponse(String xmlResponse){
-        List<KamkoApiResponseDto> responseList = new ArrayList<>();
-
-        log.warn("XML 파싱 로직 미구현 - 실제 API 응답 구조 확인 후 구현 필요");
-        return responseList;
-
-
+    /**
+     * 값이 null이 아니고 비어있지 않을 때만 query-param을 추가하는 헬퍼 메서드
+     */
+    private void addQueryParamIfPresent(UriComponentsBuilder builder, String key, String value) {
+        if (value != null && !value.isEmpty()) {
+            builder.queryParam(key, value);
+        }
     }
 
 
+    /**
+     * XML 응답 파싱
+     */
+    public List<KamkoApiResponseDto> parseXmlResponse(String xmlResponse) throws IOException {
+        // 1. xml 문자열을 래퍼 객체 (KamkoXmlResponse)로 파싱합니다.
+        KamcoXmlResponse responseWrapper = xmlMapper.readValue(xmlResponse, KamcoXmlResponse.class);
+
+        // 2. 응답코드가 정상이 아닌경우 (헤더가 없거나, resultCode가 "00"이 아닌 경우)
+        if (responseWrapper == null || responseWrapper.header == null || !"00".equals(responseWrapper.header.resultCode)) {
+            String errorMsg = (responseWrapper != null && responseWrapper.header != null)
+                    ? responseWrapper.header.resultMsg
+                    : "응답이 없거나 header가 null입니다.";
+            log.warn("API 응답 오류: {}", errorMsg);
+            return new ArrayList<>(); // 오류 시 빈 리스트 반환
+        }
+
+        // 3. 실제 아이템 리스트 반환
+        if (responseWrapper.body != null && responseWrapper.body.items != null && responseWrapper.body.items.itemlist != null) {
+            return responseWrapper.body.items.itemlist;
+        }
+
+        // 4. 아이템이 없는 정상 응답 (totalCount=0)
+        if (responseWrapper.body != null && responseWrapper.body.totalCount == 0) {
+            log.info("API 응답: 아이템이 없습니다 (totalCount=0)");
+            return new ArrayList<>();
+        }
+
+        // 5. 그 외의 이유로 아이템이 없는 경우 (예: body.items가 null)
+        log.warn("API 응답은 정상(00)이었으나, item 리스트가 비어있습니다.");
+        return new ArrayList<>();
     }
 
+    // --- XML 파싱을 위한 내부 래퍼 클래스들 ---
+    // (기존 코드와 동일, 변경 없음)
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class KamcoXmlResponse {
+        @JsonProperty("header")
+        public KamcoXmlHeader header;
+        @JsonProperty("body")
+        public KamcoXmlBody body;
+    }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class KamcoXmlHeader {
+        @JsonProperty("resultCode")
+        public String resultCode;
+        @JsonProperty("resultMsg")
+        public String resultMsg;
+    }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class KamcoXmlBody {
+        @JsonProperty("items")
+        public KamcoXmlItems items;
+        @JsonProperty("pageNo")
+        public int pageNo;
+        @JsonProperty("totalCount")
+        public int totalCount;
+        @JsonProperty("numOfRows")
+        public int numOfRows;
+    }
 
-
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class KamcoXmlItems {
+        @JsonProperty("item")
+        public List<KamkoApiResponseDto> itemlist;
+    }
+}

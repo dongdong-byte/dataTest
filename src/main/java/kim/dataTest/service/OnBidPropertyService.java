@@ -38,6 +38,12 @@ public class OnBidPropertyService
   int savedCount = 0;
   for (KamkoApiResponseDto dto : apiData)
   {
+//      API 응답에슨ㄴ sido, sgk,emd가 분리 되어 있지 않으므로 수동으로 채워준다
+//      만약 sido가 있다면
+      if(sido != null &&sido.isEmpty()){
+          dto.setSido(sido);
+      }
+
 //        중복 체크
       OnBidProperty existingProperty = onBidPropertyMapper.findOnBidPropertyByCltrMnmtNo(dto.getCltrMnmtNo());
       if(existingProperty == null){
@@ -176,7 +182,7 @@ return onBidPropertyMapper.insertBatch(entities);
 // SearchDto를 Map으로 변환 (MyBatis에서 사용)
     private Map<String, Object> convertSearchDtoToMap(OnBidPropertySearchDto searchDto) {
        Map<String , Object> params = new HashMap<>();
-       if(searchDto.getCltrNm() != null) params.put("cltrNm" , searchDto.getCltrNm());
+        if(searchDto.getCltrNm() != null) params.put("cltrNm" , searchDto.getCltrNm());
         if(searchDto.getSido() != null) params.put("sido" , searchDto.getSido());
         if(searchDto.getSgk() != null) params.put("sgk" , searchDto.getSgk());
         if(searchDto.getEmd() != null) params.put("emd" , searchDto.getEmd());

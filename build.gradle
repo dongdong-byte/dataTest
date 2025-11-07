@@ -25,6 +25,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.modelmapper:modelmapper:3.1.1'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -39,7 +40,9 @@ dependencies {
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-
+tasks.withType(JavaCompile){
+    options.compilerArgs += "-Xlint:deprecation"
+}
 tasks.named('test') {
     useJUnitPlatform()
 }
