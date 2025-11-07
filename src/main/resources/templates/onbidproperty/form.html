@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,6 @@
     <!-- 등록 폼 -->
     <form th:action="${property.id != null ? '/onbidproperty/' + property.id + '/edit' : '/onbidproperty'}"
           method="post"
-          th:object="${property}"
           class="form-box">
 
         <h2>기본 정보</h2>
@@ -27,7 +26,8 @@
                 <label for="cltrMnmtNo">물건관리번호 <span class="required">*</span></label>
                 <input type="text"
                        id="cltrMnmtNo"
-                       th:field="*{cltrMnmtNo}"
+                       name="cltrMnmtNo"
+                       th:value="${property.cltrMnmtNo}"
                        placeholder="예: 2012-1141-001291"
                        required>
             </div>
@@ -35,7 +35,8 @@
                 <label for="cltrNm">물건명 <span class="required">*</span></label>
                 <input type="text"
                        id="cltrNm"
-                       th:field="*{cltrNm}"
+                       name="cltrNm"
+                       th:value="${property.cltrNm}"
                        placeholder="물건명 입력"
                        required>
             </div>
@@ -44,10 +45,10 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="dpslMtdCd">처분방법코드 <span class="required">*</span></label>
-                <select id="dpslMtdCd" th:field="*{dpslMtdCd}" required>
+                <select id="dpslMtdCd" name="dpslMtdCd" required>
                     <option value="">선택하세요</option>
-                    <option value="0001">0001 - 매각</option>
-                    <option value="0002">0002 - 임대</option>
+                    <option value="0001" th:selected="${property.dpslMtdCd == '0001'}">0001 - 매각</option>
+                    <option value="0002" th:selected="${property.dpslMtdCd == '0002'}">0002 - 임대</option>
                 </select>
             </div>
         </div>
@@ -58,14 +59,16 @@
                 <label for="ctgrHirkId">카테고리 상위 ID</label>
                 <input type="text"
                        id="ctgrHirkId"
-                       th:field="*{ctgrHirkId}"
+                       name="ctgrHirkId"
+                       th:value="${property.ctgrHirkId}"
                        placeholder="예: 10000">
             </div>
             <div class="form-group">
                 <label for="ctgrHirkIdMid">카테고리 중위 ID</label>
                 <input type="text"
                        id="ctgrHirkIdMid"
-                       th:field="*{ctgrHirkIdMid}"
+                       name="ctgrHirkIdMid"
+                       th:value="${property.ctgrHirkIdMid}"
                        placeholder="예: 10100">
             </div>
         </div>
@@ -76,7 +79,8 @@
                 <label for="sido">시도 <span class="required">*</span></label>
                 <input type="text"
                        id="sido"
-                       th:field="*{sido}"
+                       name="sido"
+                       th:value="${property.sido}"
                        placeholder="예: 서울"
                        required>
             </div>
@@ -84,14 +88,16 @@
                 <label for="sgk">시군구</label>
                 <input type="text"
                        id="sgk"
-                       th:field="*{sgk}"
+                       name="sgk"
+                       th:value="${property.sgk}"
                        placeholder="예: 강남구">
             </div>
             <div class="form-group">
                 <label for="emd">읍면동</label>
                 <input type="text"
                        id="emd"
-                       th:field="*{emd}"
+                       name="emd"
+                       th:value="${property.emd}"
                        placeholder="예: 역삼동">
             </div>
         </div>
@@ -102,7 +108,8 @@
                 <label for="goodsPrice">감정가 <span class="required">*</span></label>
                 <input type="number"
                        id="goodsPrice"
-                       th:field="*{goodsPrice}"
+                       name="goodsPrice"
+                       th:value="${property.goodsPrice}"
                        placeholder="숫자만 입력"
                        min="0"
                        required>
@@ -111,7 +118,8 @@
                 <label for="openPrice">최저입찰가 <span class="required">*</span></label>
                 <input type="number"
                        id="openPrice"
-                       th:field="*{openPrice}"
+                       name="openPrice"
+                       th:value="${property.openPrice}"
                        placeholder="숫자만 입력"
                        min="0"
                        required>
@@ -124,14 +132,16 @@
                 <label for="pbctBegnDtm">공고시작일</label>
                 <input type="text"
                        id="pbctBegnDtm"
-                       th:field="*{pbctBegnDtm}"
+                       name="pbctBegnDtm"
+                       th:value="${property.pbctBegnDtm}"
                        placeholder="YYYYMMDD 형식">
             </div>
             <div class="form-group">
                 <label for="pbctClsDtm">공고종료일</label>
                 <input type="text"
                        id="pbctClsDtm"
-                       th:field="*{pbctClsDtm}"
+                       name="pbctClsDtm"
+                       th:value="${property.pbctClsDtm}"
                        placeholder="YYYYMMDD 형식">
             </div>
         </div>

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>물건 상세 정보</title>
+    <title>물건 상세정보</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>물건 상세 정보</h1>
+        <h1>물건 상세정보</h1>
         <nav>
             <a th:href="@{/onbidproperty}" class="btn">목록으로</a>
             <a th:href="@{/onbidproperty/{id}/edit(id=${property.id})}" class="btn btn-warning">수정</a>
-            <button onclick="deleteProperty()" class="btn btn-danger">삭제</button>
+            <form th:action="@{/onbidproperty/{id}/delete(id=${property.id})}" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
         </nav>
     </header>
 
@@ -25,7 +27,7 @@
     <!-- 상세 정보 -->
     <div class="detail-box">
         <h2>기본 정보</h2>
-        <div class="detail-grid">
+        <div class="detail-row">
             <div class="detail-item">
                 <label>ID</label>
                 <span th:text="${property.id}">1</span>
@@ -34,20 +36,24 @@
                 <label>물건관리번호</label>
                 <span th:text="${property.cltrMnmtNo}">2012-1141-001291</span>
             </div>
-            <div class="detail-item">
+        </div>
+
+        <div class="detail-row">
+            <div class="detail-item full-width">
                 <label>물건명</label>
                 <span th:text="${property.cltrNm}">물건명</span>
             </div>
+        </div>
+
+        <div class="detail-row">
             <div class="detail-item">
                 <label>처분방법코드</label>
                 <span th:text="${property.dpslMtdCd}">0001</span>
             </div>
         </div>
-    </div>
 
-    <div class="detail-box">
         <h2>카테고리 정보</h2>
-        <div class="detail-grid">
+        <div class="detail-row">
             <div class="detail-item">
                 <label>카테고리 상위 ID</label>
                 <span th:text="${property.ctgrHirkId}">10000</span>
@@ -57,11 +63,9 @@
                 <span th:text="${property.ctgrHirkIdMid}">10100</span>
             </div>
         </div>
-    </div>
 
-    <div class="detail-box">
         <h2>소재지 정보</h2>
-        <div class="detail-grid">
+        <div class="detail-row">
             <div class="detail-item">
                 <label>시도</label>
                 <span th:text="${property.sido}">서울</span>
@@ -75,44 +79,42 @@
                 <span th:text="${property.emd}">역삼동</span>
             </div>
         </div>
-    </div>
 
-    <div class="detail-box">
         <h2>가격 정보</h2>
-        <div class="detail-grid">
+        <div class="detail-row">
             <div class="detail-item">
                 <label>감정가</label>
-                <span th:text="${#numbers.formatInteger(property.goodsPrice, 0, 'COMMA')} + ' 원'">
-                        1,000,000 원
-                    </span>
+                <span th:text="${#numbers.formatInteger(property.goodsPrice, 0, 'COMMA')} + '원'">1,000,000원</span>
             </div>
             <div class="detail-item">
                 <label>최저입찰가</label>
-                <span th:text="${#numbers.formatInteger(property.openPrice, 0, 'COMMA')} + ' 원'">
-                        800,000 원
-                    </span>
+                <span th:text="${#numbers.formatInteger(property.openPrice, 0, 'COMMA')} + '원'">800,000원</span>
             </div>
         </div>
-    </div>
 
-    <div class="detail-box">
         <h2>공고 정보</h2>
-        <div class="detail-grid">
+        <div class="detail-row">
             <div class="detail-item">
                 <label>공고시작일</label>
                 <span th:text="${property.pbctBegnDtm}">20240101</span>
             </div>
             <div class="detail-item">
                 <label>공고종료일</label>
-                <span th:text="${property.pbctClsDtm}">20241231</span>
+                <span th:text="${property.pbctClsDtm}">20240131</span>
             </div>
         </div>
-    </div>
 
-    <div class="form-actions">
-        <a th:href="@{/onbidproperty}" class="btn">목록으로</a>
-        <a th:href="@{/onbidproperty/{id}/edit(id=${property.id})}" class="btn btn-warning">수정</a>
-        <button onclick="deleteProperty()" class="btn btn-danger">삭제</button>
+        <h2>기타 정보</h2>
+        <div class="detail-row">
+            <div class="detail-item">
+                <label>등록일시</label>
+                <span th:text="${property.createdAt}">2024-01-01 00:00:00</span>
+            </div>
+            <div class="detail-item">
+                <label>수정일시</label>
+                <span th:text="${property.updatedAt}">2024-01-01 00:00:00</span>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -120,19 +122,57 @@
     </footer>
 </div>
 
-<!-- 삭제 폼 (숨김) -->
-<form th:action="@{/onbidproperty/{id}/delete(id=${property.id})}"
-      method="post"
-      id="deleteForm"
-      style="display: none;">
-</form>
-
-<script>
-    function deleteProperty() {
-        if (confirm('정말 삭제하시겠습니까?')) {
-            document.getElementById('deleteForm').submit();
-        }
+<style>
+    .detail-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
     }
-</script>
+
+    .detail-box h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #007bff;
+        color: #333;
+    }
+
+    .detail-box h2:first-of-type {
+        margin-top: 0;
+    }
+
+    .detail-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+
+    .detail-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-item.full-width {
+        flex: 100%;
+    }
+
+    .detail-item label {
+        font-weight: bold;
+        color: #666;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .detail-item span {
+        font-size: 16px;
+        color: #333;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 4px;
+    }
+</style>
 </body>
 </html>
