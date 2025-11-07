@@ -40,7 +40,7 @@ public class OnBidPropertyService
   {
 //      API 응답에슨ㄴ sido, sgk,emd가 분리 되어 있지 않으므로 수동으로 채워준다
 //      만약 sido가 있다면
-      if(sido != null &&sido.isEmpty()){
+      if(sido != null && !sido.isEmpty()){
           dto.setSido(sido);
       }
 
