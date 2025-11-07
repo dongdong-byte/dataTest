@@ -1,7 +1,8 @@
-package kim.dataTest.controller;
+package kim.dataTest.contorller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kim.dataTest.contorller.OnBidPropertyRestController;
+
 import kim.dataTest.dto.OnBidPropertyCreateDto;
 import kim.dataTest.dto.OnBidPropertyDetailDto;
 import kim.dataTest.dto.OnBidPropertyListDto;
