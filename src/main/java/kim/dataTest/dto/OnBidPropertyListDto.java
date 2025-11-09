@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class OnBidPropertyListDto {
 //    목록 화면용
 private Long id;//    고유 ID
+    private String pbctNo;  // 공고번호
     private String cltrMnmtNo;//    물건 관리번호
     private String cltrNm;//    물건명
     private String sido;//    시도

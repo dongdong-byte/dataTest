@@ -14,6 +14,8 @@
             <a th:href="@{/onbidproperty}" class="btn">전체목록</a>
             <a th:href="@{/onbidproperty/new}" class="btn btn-primary">신규등록</a>
             <form th:action="@{/onbidproperty/fetch}" method="post" style="display: inline;">
+                <input type="hidden" name="numOfRows" value="10">
+                <input type="hidden" name="pageNo" value="1">
                 <button type="submit" class="btn btn-success">API 호출</button>
             </form>
         </nav>
@@ -87,6 +89,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>공고번호</th> <!-- ⭐ 추가 -->
                 <th>물건관리번호</th>
                 <th>물건명</th>
                 <th>시도</th>
@@ -104,6 +107,7 @@
             </tr>
             <tr th:each="property : ${properties}">
                 <td th:text="${property.id}">1</td>
+                <td th:text="${property.pbctNo}">9975636</td> <!-- ⭐ 추가 -->
                 <td th:text="${property.cltrMnmtNo}">2012-1141-001291</td>
                 <td>
                     <a th:href="@{/onbidproperty/{id}(id=${property.id})}"

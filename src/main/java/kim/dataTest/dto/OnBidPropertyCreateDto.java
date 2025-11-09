@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OnBidPropertyCreateDto {
     private Long id;
+    @NotBlank(message = "공고번호는 필수입니다.")
+    private String pbctNo;
 @NotBlank(message = "물건 관리 번호는 필수입니다.")
     private String cltrMnmtNo;//    물건 관리번호
     @NotBlank(message = "물건명은 필수입니다.")

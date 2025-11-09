@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class OnBidPropertySearchDto {
     private String cltrNm;//    물건명
+    private String pbctNo;  // 공고번호
     private String sido;//    시도
     private String sgk;                 // 시군구
     private String emd;//    읍면동

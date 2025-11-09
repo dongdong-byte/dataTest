@@ -45,14 +45,15 @@ public class OnBidPropertyService
       }
 
 //        중복 체크
-      OnBidProperty existingProperty = onBidPropertyMapper.findOnBidPropertyByCltrMnmtNo(dto.getCltrMnmtNo());
+      OnBidProperty existingProperty = onBidPropertyMapper.findOnBidPropertyByPbctNo(dto.getPbctNo());
       if(existingProperty == null){
 //          DTO->Entity로 바꾼다음에 저장
           OnBidProperty entity = modelMapper.map(dto, OnBidProperty.class);
           onBidPropertyMapper.insert(entity);
           savedCount++;
+          log.info("저장 완료: 공고번호={}, 물건관리번호={}", dto.getPbctNo(), dto.getCltrMnmtNo());
       }else {
-          log.info("이미 존재하는 물건 : {}", dto.getCltrMnmtNo());
+          log.info("이미 존재하는 물건 : {}", dto.getPbctNo());
       }
 
   }

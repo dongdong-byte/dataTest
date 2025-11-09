@@ -21,6 +21,7 @@ public interface OnBidPropertyMapper {
     OnBidProperty findOnBidPropertyById(Long id);
 //    물건 관리 번호로 조회(중복 체크용)
     OnBidProperty findOnBidPropertyByCltrMnmtNo(String cltrMnmtNo);
+    OnBidProperty findOnBidPropertyByPbctNo(String pbctNo);  // ⭐ 변경
 //    전체 건수 조회
     int count();
 //    UPDATE
