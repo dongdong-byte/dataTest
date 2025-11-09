@@ -1,5 +1,6 @@
 package kim.dataTest.service;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -211,11 +212,24 @@ public class KamcoApiService {
     }
 
     @Getter
-    @Setter
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class KamcoXmlItems {
+        private List<KamkoApiResponseDto> itemlist = new ArrayList<>();
+
         @JsonProperty("item")
-        public List<KamkoApiResponseDto> itemlist;
+        @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+        public void setItemlist(List<KamkoApiResponseDto> itemlist) {
+            this.itemlist = itemlist;
+        }
+
+        // 단일 item이 올 경우를 대비
+        @JsonProperty("item")
+        public void setItem(KamkoApiResponseDto item) {
+            if (this.itemlist == null) {
+                this.itemlist = new ArrayList<>();
+            }
+            this.itemlist.add(item);
+        }
     }
 }
