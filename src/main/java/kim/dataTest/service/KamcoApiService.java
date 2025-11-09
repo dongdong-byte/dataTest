@@ -212,6 +212,7 @@ public class KamcoApiService {
     }
 
     @Getter
+    @Setter
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class KamcoXmlItems {
