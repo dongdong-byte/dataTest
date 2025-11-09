@@ -23,7 +23,7 @@ public class KamcoApiService {
     @Value("${kamco.api.service-key}")
     private String serviceKey;
 
-    private  XmlMapper xmlMapper;
+    private XmlMapper xmlMapper;
     private final RestTemplate restTemplate;
 
     // API 기본 URL
@@ -215,21 +215,7 @@ public class KamcoApiService {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class KamcoXmlItems {
-        private List<KamkoApiResponseDto> itemlist = new ArrayList<>();
-
         @JsonProperty("item")
-        @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-        public void setItemlist(List<KamkoApiResponseDto> itemlist) {
-            this.itemlist = itemlist;
-        }
-
-        // 단일 item이 올 경우를 대비
-        @JsonProperty("item")
-        public void setItem(KamkoApiResponseDto item) {
-            if (this.itemlist == null) {
-                this.itemlist = new ArrayList<>();
-            }
-            this.itemlist.add(item);
-        }
+        private List<KamkoApiResponseDto> itemlist;
     }
 }
