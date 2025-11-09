@@ -88,7 +88,18 @@ public class KamcoApiService {
             String response = restTemplate.getForObject(url, String.class);
             log.info("API 응답 수신 완료");
             // 응답 본문은 매우 길 수 있으므로 DEBUG 레벨로 로깅하는 것을 권장
-            log.debug("API 응답 : {}", response);
+            log.info("API 응답 : {}", response);
+
+            // ⭐ XML을 파일로 저장 (디버깅용)
+            try {
+                java.nio.file.Files.write(
+                        java.nio.file.Paths.get("api-response.xml"),
+                        response.getBytes(java.nio.charset.StandardCharsets.UTF_8)
+                );
+                log.info("XML 파일 저장 완료: api-response.xml");
+            } catch (Exception e) {
+                log.warn("XML 파일 저장 실패", e);
+            }
 
             return response;
 
@@ -125,32 +136,39 @@ public class KamcoApiService {
      * XML 응답 파싱
      */
     public List<KamkoApiResponseDto> parseXmlResponse(String xmlResponse) throws IOException {
-        // 1. xml 문자열을 래퍼 객체 (KamkoXmlResponse)로 파싱합니다.
-        KamcoXmlResponse responseWrapper = xmlMapper.readValue(xmlResponse, KamcoXmlResponse.class);
+        try {
+            // 1. xml 문자열을 래퍼 객체 (KamkoXmlResponse)로 파싱합니다.
+            KamcoXmlResponse responseWrapper = xmlMapper.readValue(xmlResponse, KamcoXmlResponse.class);
 
-        // 2. 응답코드가 정상이 아닌경우 (헤더가 없거나, resultCode가 "00"이 아닌 경우)
-        if (responseWrapper == null || responseWrapper.header == null || !"00".equals(responseWrapper.header.resultCode)) {
-            String errorMsg = (responseWrapper != null && responseWrapper.header != null)
-                    ? responseWrapper.header.resultMsg
-                    : "응답이 없거나 header가 null입니다.";
-            log.warn("API 응답 오류: {}", errorMsg);
-            return new ArrayList<>(); // 오류 시 빈 리스트 반환
-        }
+            // 2. 응답코드가 정상이 아닌경우 (헤더가 없거나, resultCode가 "00"이 아닌 경우)
+            if (responseWrapper == null || responseWrapper.header == null || !"00".equals(responseWrapper.header.resultCode)) {
+                String errorMsg = (responseWrapper != null && responseWrapper.header != null)
+                        ? responseWrapper.header.resultMsg
+                        : "응답이 없거나 header가 null입니다.";
+                log.warn("API 응답 오류: {}", errorMsg);
+                return new ArrayList<>(); // 오류 시 빈 리스트 반환
+            }
 
-        // 3. 실제 아이템 리스트 반환
-        if (responseWrapper.body != null && responseWrapper.body.items != null && responseWrapper.body.items.itemlist != null) {
-            return responseWrapper.body.items.itemlist;
-        }
+            // 3. 실제 아이템 리스트 반환
+            if (responseWrapper.body != null && responseWrapper.body.items != null && responseWrapper.body.items.itemlist != null) {
+                return responseWrapper.body.items.itemlist;
+            }
 
-        // 4. 아이템이 없는 정상 응답 (totalCount=0)
-        if (responseWrapper.body != null && responseWrapper.body.totalCount == 0) {
-            log.info("API 응답: 아이템이 없습니다 (totalCount=0)");
+            // 4. 아이템이 없는 정상 응답 (totalCount=0)
+            if (responseWrapper.body != null && responseWrapper.body.totalCount == 0) {
+                log.info("API 응답: 아이템이 없습니다 (totalCount=0)");
+                return new ArrayList<>();
+            }
+
+            // 5. 그 외의 이유로 아이템이 없는 경우 (예: body.items가 null)
+            log.warn("API 응답은 정상(00)이었으나, item 리스트가 비어있습니다.");
             return new ArrayList<>();
-        }
 
-        // 5. 그 외의 이유로 아이템이 없는 경우 (예: body.items가 null)
-        log.warn("API 응답은 정상(00)이었으나, item 리스트가 비어있습니다.");
-        return new ArrayList<>();
+        } catch (Exception e) {
+            log.error("XML 파싱 중 오류 발생", e);
+            log.error("파싱 실패한 XML: {}", xmlResponse);
+            throw new IOException("XML 파싱 실패: " + e.getMessage(), e);
+        }
     }
 
     // --- XML 파싱을 위한 내부 래퍼 클래스들 ---
