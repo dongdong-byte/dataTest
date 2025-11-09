@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<response>
+	<header>
+		<resultCode>00</resultCode>
+		<resultMsg>NORMAL SERVICE.</resultMsg>
+	</header>
+	<body>
+	   <items>
+			
+				<item>
+				    <RNUM>1</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9975636</PBCT_NO>
+					<PBCT_CDTN_NO>5638393</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797460</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>3699000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(10%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20260112140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20260114170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>2</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9975635</PBCT_NO>
+					<PBCT_CDTN_NO>5638368</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797435</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>7398000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(20%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20260105140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20260107170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>3</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9970394</PBCT_NO>
+					<PBCT_CDTN_NO>5638340</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797407</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>11097000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(30%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251229140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251231170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>4</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9970393</PBCT_NO>
+					<PBCT_CDTN_NO>5638310</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797377</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>14796000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(40%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251222140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251224170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>5</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9949244</PBCT_NO>
+					<PBCT_CDTN_NO>5563975</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797193</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>36989000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(100%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251110140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251112170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>583</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>6</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9959424</PBCT_NO>
+					<PBCT_CDTN_NO>5564104</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797213</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>22194000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(60%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251208140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251210170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>2</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>7</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9954543</PBCT_NO>
+					<PBCT_CDTN_NO>5564009</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797198</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>33291000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(90%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251117140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251119170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>8</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9954544</PBCT_NO>
+					<PBCT_CDTN_NO>5564042</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797203</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>29592000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(80%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251124140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251126170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>9</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9959423</PBCT_NO>
+					<PBCT_CDTN_NO>5564074</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797208</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>25893000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(70%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251201140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251203170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>1</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+				<item>
+				    <RNUM>10</RNUM>
+					<PLNM_NO>844582</PLNM_NO>
+					<PBCT_NO>9965034</PBCT_NO>
+					<PBCT_CDTN_NO>5564132</PBCT_CDTN_NO>
+					<CLTR_NO>1892916</CLTR_NO>
+					<CLTR_HSTR_NO>5797218</CLTR_HSTR_NO>
+					<SCRN_GRP_CD>0001</SCRN_GRP_CD>
+					<CTGR_FULL_NM>토지 / 전</CTGR_FULL_NM>
+					<BID_MNMT_NO>0032</BID_MNMT_NO>
+					<CLTR_NM>충청북도 괴산군 소수면 옥현리 17-1  </CLTR_NM>
+					<CLTR_MNMT_NO>2025-06817-001</CLTR_MNMT_NO>
+					<LDNM_ADRS>충청북도 괴산군 소수면 옥현리 17-1</LDNM_ADRS>
+					<NMRD_ADRS> </NMRD_ADRS>
+					<LDNM_PNU>4376040027000170001</LDNM_PNU>
+					<DPSL_MTD_CD>0001</DPSL_MTD_CD>
+					<DPSL_MTD_NM>매각</DPSL_MTD_NM>
+					<BID_MTD_NM>일반경쟁(최고가방식) / 총액</BID_MTD_NM>
+					<MIN_BID_PRC>18495000</MIN_BID_PRC>
+					<APSL_ASES_AVG_AMT>36989000</APSL_ASES_AVG_AMT>
+					<FEE_RATE>(50%)</FEE_RATE>
+					<PBCT_BEGN_DTM>20251215140000</PBCT_BEGN_DTM>
+					<PBCT_CLS_DTM>20251217170000</PBCT_CLS_DTM>
+					<PBCT_CLTR_STAT_NM>입찰준비중</PBCT_CLTR_STAT_NM>
+					<USCBD_CNT>0</USCBD_CNT>
+					<IQRY_CNT>3</IQRY_CNT>
+					<GOODS_NM>전 787 ㎡  , 휴경지 상태</GOODS_NM>
+					<MANF></MANF>
+					<MDL></MDL>
+					<NRGT></NRGT>
+					<GRBX></GRBX>
+					<ENDPC></ENDPC>
+					<VHCL_MLGE></VHCL_MLGE>
+					<FUEL></FUEL>
+					<SCRT_NM></SCRT_NM>
+					<TPBZ></TPBZ>
+					<ITM_NM></ITM_NM>
+					<MMB_RGT_NM></MMB_RGT_NM>
+					<CLTR_IMG_FILES>
+						
+						
+						
+					</CLTR_IMG_FILES>					
+				</item>
+			
+		</items>
+			<pageNo>1</pageNo>
+			<totalCount>46879</totalCount>
+			<numOfRows>10</numOfRows>
+	</body>
+
+</response>
