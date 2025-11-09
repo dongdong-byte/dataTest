@@ -19,6 +19,10 @@ public class KamkoApiResponseDto {
     @JacksonXmlProperty(localName = "RNUM")
     private String rnum;
 
+    @JsonProperty("PBCT_NO")  // ⭐ 추가
+    @JacksonXmlProperty(localName = "PBCT_NO")
+    private String pbctNo;
+
     @JsonProperty("CLTR_MNMT_NO")
     @JacksonXmlProperty(localName = "CLTR_MNMT_NO")
     private String cltrMnmtNo;

@@ -140,8 +140,13 @@ public String listWithPaging(
             @RequestParam(defaultValue = "1") int pageNo,
             RedirectAttributes redirectAttributes) throws IOException{
 
-        int savedCount = onBidPropertyService.fetchAndSavePropertiesFromApi(sido, numOfRows, pageNo);
-        redirectAttributes.addFlashAttribute("message",savedCount+"건이 저장되었습니다");
+        try {
+            int savedCount = onBidPropertyService.fetchAndSavePropertiesFromApi(sido, numOfRows, pageNo);
+            redirectAttributes.addFlashAttribute("message", savedCount + "건이 저장되었습니다");
+        } catch (IOException e) {
+            log.error("API 호출 중 오류 발생", e);
+            redirectAttributes.addFlashAttribute("message", "API 호출 실패: " + e.getMessage());
+        }
         return  "redirect:/onbidproperty";
 
     }

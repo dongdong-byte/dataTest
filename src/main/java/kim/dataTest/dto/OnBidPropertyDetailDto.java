@@ -1,6 +1,7 @@
 package kim.dataTest.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class OnBidPropertyDetailDto {
 //    상세/ 수정화면용
     private Long id;//    고유 ID
+    private String pbctNo;
     private String cltrMnmtNo;//    물건 관리번호
     private String cltrNm;//    물건명
     private String dpslMtdCd;//    처분방법 코드 (0001: 매각 , 0002: 임대)

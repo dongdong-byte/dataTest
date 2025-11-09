@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class OnBidProperty {
     private Long id;//    고유 ID
+    private String pbctNo;           // ⭐ 추가: 공고번호
     private String cltrMnmtNo;//    물건 관리번호
     private String cltrNm;//    물건명
     private String dpslMtdCd;//    처분방법 코드 (0001: 매각 , 0002: 임대)
