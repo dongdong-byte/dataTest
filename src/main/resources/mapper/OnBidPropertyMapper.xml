@@ -86,12 +86,7 @@
             ,#{item.pbctClsDtm})
         </foreach>
     </insert>
-    <!-- 공고번호로 조회 (중복 체크용) -->
-    <select id="findOnBidPropertyByPbctNo" resultType="kim.dataTest.domain.OnBidProperty">
-        SELECT *
-        FROM onbidproperty
-        WHERE pbct_no = #{pbctNo}
-    </select>
+
     <!--======================READ=================== -->
     <!--    전체 목록 조회-->
     <select id="findAll" resultMap="onBidPropertyResultMap">

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +29,6 @@ public class OnBidPropertyDetailDto {
     private Long openPrice;//    최저 입찰가
     private  String pbctBegnDtm;//    공고 시작일
     private  String pbctClsDtm; //    공고 종료일(YYYYMMDD)
-
+    private LocalDateTime createdAt;  // 추가
+    private LocalDateTime updatedAt;  // 추가
 }
